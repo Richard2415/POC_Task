@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -6,7 +7,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private http: HttpClient) { }
 
   loggedIn = false;
 
@@ -17,6 +18,13 @@ export class AuthService {
      } else {
       return 403;
      }
+  }
+
+
+  register(uname: string, pword: string){
+    //send data to server
+    return this.http
+    .post('API_endpoint', {userName: uname, password: pword});
   }
 
   canAccess(){

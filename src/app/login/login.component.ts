@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     let response = this.auth.login(this.formData.userName, this.formData.password)
     if(response === 200){
+      // this.auth.register(this.formData.userName, this.formData.password)
       this.router.navigate(['upload'])
     }
     else if(response === 403){
