@@ -1,0 +1,32 @@
+
+<app-navbar></app-navbar>
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="mt-4 p-5 bg-secondary text-white rounded">
+          <h2>Upload Your File</h2>
+          <p>Select the txt file only</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <input
+  type="file"
+  class="file-input"
+  (change)="onSelectedFile($event)"
+  #fileUpload
+  >
+</div>
+<div class="file">
+  <p>{{fileName || "No file uploaded yet."}}</p>
+
+  <button mat-mini-fab class="btn btn-success"
+  (click)="fileUpload.click()">
+    Upload
+  </button>
+</div>
+
+

@@ -1,0 +1,14 @@
+.file-input {
+  display: none;
+}
+
+.file{
+  margin-top: 75px;
+  display: flex;
+  justify-content: center;
+}
+p{
+  font-size: large;
+  font-weight: 500;
+  margin-top: 10px;
+}
