@@ -11,6 +11,7 @@ export class AuthService {
 
   loggedIn = false;
 
+  //Authentication
   login(uname: string, pword: string):Boolean | Number{
      if(uname === 'Mirafra' && pword === 'Mirafra@123'){
       this.loggedIn = true;
@@ -21,11 +22,12 @@ export class AuthService {
   }
 
 
+  //send data to server
   register(uname: string, pword: string){
-    //send data to server
     return this.http
     .post('API_endpoint', {userName: uname, password: pword});
   }
+
 
   canAccess(){
     if(!this.loggedIn){
