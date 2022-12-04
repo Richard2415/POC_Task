@@ -24,15 +24,13 @@ export class UploadComponent implements OnInit {
     if(event.target.files.length > 0){
       const file = event.target.files[0];
       this.fileName = file.name;
-    if(file.type == 'image/txt'){
 
+      if(file.type == 'image/txt'){
       const formData = new FormData();
       formData.append('file', file);
       // this.http.post('url', formData).subscribe((res:any) => {
-      //  console.log(res);
+      //  console.log(`File is uploaded ${res}`);
       // });
-    } else {
-      alert('Please select only text file');
      }
     }
   }
