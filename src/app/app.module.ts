@@ -10,13 +10,15 @@ import { FormsModule } from '@angular/forms';
 import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component';
 
 
 const routes:Routes = [
+  {path: 'register', component: RegisterComponent},
   {path: 'login', component:LoginComponent},
   {path: 'upload', component:UploadComponent},
-  {path: '', redirectTo:'login', pathMatch:'full'},
-  {path: '**', redirectTo:'login'}
+  {path: '', redirectTo:'register', pathMatch:'full'},
+  {path: '**', redirectTo:'register'}
 ]
 
 const materialModules = [
@@ -28,7 +30,8 @@ const materialModules = [
     AppComponent,
     LoginComponent,
     UploadComponent,
-    NavbarComponent
+    NavbarComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

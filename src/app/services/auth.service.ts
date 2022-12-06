@@ -9,29 +9,44 @@ export class AuthService {
 
   constructor(private router:Router, private http: HttpClient) { }
 
-  loggedIn = false;
 
-  //Authentication
-  login(uname: string, pword: string):Boolean | Number{
-     if(uname === 'Mirafra' && pword === 'Mirafra@123'){
-      this.loggedIn = true;
-      return 200;
-     } else {
-      return 403;
-     }
+
+  isAuthenticated():boolean{
+    if(sessionStorage.getItem('id')!==null) {
+      return true;
+    }
+      return false;
   }
 
-
-  //send data to server
-  register(uname: string, pword: string){
+  // Register call
+  register(uname: string, pword: string, cPword: string){
     return this.http
-    .post('API_endpoint', {userName: uname, password: pword});
+    .post<{id: string}>('Regsiter_API', {userName: uname, password: pword, confirmPassword: cPword});
   }
 
 
-  canAccess(){
-    if(!this.loggedIn){
-      this.router.navigate(['login'])
+  //Login call
+   login(uname: string, pword: string){
+    return this.http
+    .post<{id: string}>('Login_API',  {username: uname, password: pword})
+   }
+
+
+  canAuthenticate(){
+    if(this.isAuthenticated()){
+     this.router.navigate(['/upload'])
     }
   }
+
+  canAccess(){
+    if(!this.isAuthenticated()){
+      this.router.navigate(['/login'])
+    }
+  }
+
+  // store id as session storage
+  storeId(id:string){
+    sessionStorage.setItem('id', id);
+  }
+
 }

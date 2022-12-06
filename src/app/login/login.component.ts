@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, enableProdMode, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -21,17 +21,21 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.auth.canAuthenticate();
   }
 
   onSubmit(){
-    let response = this.auth.login(this.formData.userName, this.formData.password)
-    if(response === 200){
-      // this.auth.register(this.formData.userName, this.formData.password)
-      this.router.navigate(['upload'])
-    }
-    else if(response === 403){
-      this.errorMessage += 'Invalid Credentials';
-    }
+
+    //call login API Service
+    this.auth.login(this.formData.userName, this.formData.password)
+    .subscribe({
+      next: data => {
+        //store token from response data
+        this.auth.storeId(data.id);
+        console.log('Login UserId '+ data.id)
+        this.auth.canAuthenticate();
+      }
+    })
   }
 
 }

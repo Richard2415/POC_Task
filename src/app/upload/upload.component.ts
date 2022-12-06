@@ -12,15 +12,13 @@ export class UploadComponent implements OnInit {
   constructor(private auth: AuthService, private http: HttpClient) { }
 
   fileName='';
-  fileContent:any[] = [];
-
 
   ngOnInit(): void {
     this.auth.canAccess()
   }
 
   onSelectedFile(event:any){
-    // console.log(event)
+    console.log(event.target.files)
     if(event.target.files.length > 0){
       const file = event.target.files[0];
       this.fileName = file.name;
@@ -28,10 +26,12 @@ export class UploadComponent implements OnInit {
       if(file.type == 'image/txt'){
       const formData = new FormData();
       formData.append('file', file);
-      // this.http.post('url', formData).subscribe((res:any) => {
-      //  console.log(`File is uploaded ${res}`);
-      // });
-     }
+      
+      //Upload API is added
+      this.http.post('Upload_API', formData).subscribe((res:any) => {
+       console.log(`File is uploaded ${res}`);
+      });
+      }
     }
   }
 
