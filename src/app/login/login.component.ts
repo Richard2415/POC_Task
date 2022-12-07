@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   formData = {
-    userName : '',
+    username : '',
     password : ''
   };
 
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   onSubmit(){
 
     //call login API Service
-    this.auth.login(this.formData.userName, this.formData.password)
+    this.auth.login(this.formData.username, this.formData.password)
     .subscribe({
       next: data => {
         //store token from response data

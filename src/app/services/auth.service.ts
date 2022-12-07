@@ -19,16 +19,18 @@ export class AuthService {
   }
 
   // Register call
-  register(uname: string, pword: string, cPword: string){
+  register(username: string, password: string, confirm_password: string){
+    console.log('Calling Register')
     return this.http
-    .post<{id: string}>('Regsiter_API', {userName: uname, password: pword, confirmPassword: cPword});
+    .post<{id:string}>('http://127.0.0.1:5000/register', {username: username, password: password, confirm_password: confirm_password});
   }
 
 
   //Login call
-   login(uname: string, pword: string){
+   login(username: string, password: string){
+    console.log('Calling Login')
     return this.http
-    .post<{id: string}>('Login_API',  {username: uname, password: pword})
+    .post<{id:string}>('http://127.0.0.1:5000/login',  {username: username, password: password})
    }
 
 

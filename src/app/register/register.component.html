@@ -9,16 +9,18 @@
         action=""
         #f="ngForm"
         novalidate
-        (ngSumbit) = f.form.valid&&onSubmit()
+        (ngSubmit)="f.form.valid&&onSubmit()"
         >
         <div class="form-group" class="mb-3">
           <label for="inputUsername" class="text-uppercase">UserName</label>
+
           <input
           type="text"
           class="form-control"
-          name="name"
+          name="username"
           id=""
-          [(ngModel)]="formData.name"
+          placeholder="enter username"
+          [(ngModel)] = "formData.username"
           #name="ngModel"
           required>
           <span
@@ -35,6 +37,7 @@
           class="form-control"
           name="password"
           id=""
+          placeholder="enter password"
           [(ngModel)]="formData.password"
           #password="ngModel"
           required
@@ -58,7 +61,7 @@
          name="confirmPassword"
          matching="passMatch"
          id=""
-         [(ngModel)]="formData.confirmPassword"
+         [(ngModel)]="formData.confirm_password"
          #confirmPassword="ngModel"
          required>
          <span
@@ -68,7 +71,7 @@
          </span>
          <span
          class="text-danger"
-         *ngIf="this.submit && formData.password !== formData.confirmPassword">
+         *ngIf="this.submit && formData.password !== formData.confirm_password">
           Confirm Password does not match
          </span>
         </div>
@@ -86,7 +89,6 @@
           (click)="submit=true">
         </div>
 
-        <div class="clearfix"></div>
 
         <div class="form-group">
           Already have account ? Please

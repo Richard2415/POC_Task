@@ -8,7 +8,12 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-   formData = {name:'', password:'', confirmPassword: ''}
+   formData = {
+    username : "",
+    password : "",
+    confirm_password : ""
+   };
+
    submit = false;
    errorMessage = '';
 
@@ -16,10 +21,13 @@ export class RegisterComponent implements OnInit {
   constructor(private auth:AuthService) { }
 
   ngOnInit(): void {
+    this.auth.canAuthenticate();
   }
 
   onSubmit(){
-    this.auth.register(this.formData.name, this.formData.password, this.formData.confirmPassword)
+
+    console.log(this.formData);
+    this.auth.register(this.formData.username, this.formData.password, this.formData.confirm_password)
     .subscribe({
       next: data => {
         this.auth.storeId(data.id)
@@ -27,7 +35,7 @@ export class RegisterComponent implements OnInit {
         this.auth.canAuthenticate()
       },
       error: data => {
-        if(data.message = 'USER_EXISTS'){
+        if(data.message = 'This username already exist try another'){
            this.errorMessage = 'Already User exists!';
         } else {
           this.errorMessage = 'Unknown error occured when creating this account!';

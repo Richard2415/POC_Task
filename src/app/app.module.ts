@@ -28,10 +28,10 @@ const materialModules = [
 @NgModule({
   declarations: [
     AppComponent,
+    RegisterComponent,
     LoginComponent,
     UploadComponent,
     NavbarComponent,
-    RegisterComponent
   ],
   imports: [
     BrowserModule,
