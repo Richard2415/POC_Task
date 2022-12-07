@@ -26,9 +26,9 @@ export class UploadComponent implements OnInit {
       if(file.type == 'image/txt'){
       const formData = new FormData();
       formData.append('file', file);
-      
+
       //Upload API is added
-      this.http.post('Upload_API', formData).subscribe((res:any) => {
+      this.http.post('http://127.0.0.1:5000/upload', formData).subscribe((res:any) => {
        console.log(`File is uploaded ${res}`);
       });
       }
