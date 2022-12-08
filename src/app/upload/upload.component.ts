@@ -18,12 +18,13 @@ export class UploadComponent implements OnInit {
   }
 
   onSelectedFile(event:any){
+    // debugger;
     console.log(event.target.files)
     if(event.target.files.length > 0){
       const file = event.target.files[0];
       this.fileName = file.name;
 
-      if(file.type == 'image/txt'){
+      if(file.type == 'text/csv'){
       const formData = new FormData();
       formData.append('file', file);
 

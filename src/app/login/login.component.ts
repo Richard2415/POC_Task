@@ -28,13 +28,21 @@ export class LoginComponent implements OnInit {
 
     //call login API Service
     this.auth.login(this.formData.username, this.formData.password)
-    .subscribe({
-      next: data => {
-        //store token from response data
-        this.auth.storeId(data.id);
-        console.log('Login UserId '+ data.id)
-        this.auth.canAuthenticate();
+    .subscribe(
+      (data) => {
+         this.auth.storeId(data.id);
+         this.auth.canAuthenticate();
+      },
+      (error) => {
+         console.log(error);
+         if(error.message == 'Invalid username or password'){
+          this.errorMessage = 'Invalid username or password';
+         } else {
+          this.errorMessage = 'Unknown error occured!';
+         }
       }
+    ).add(() => {
+      console.log('Login Successful')
     })
   }
 

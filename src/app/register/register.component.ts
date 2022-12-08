@@ -26,24 +26,23 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(){
 
-    console.log(this.formData);
+    // console.log(this.formData);
     this.auth.register(this.formData.username, this.formData.password, this.formData.confirm_password)
-    .subscribe({
-      next: data => {
-        this.auth.storeId(data.id)
-        console.log('Regsitered UserId: '+ data.id);
-        this.auth.canAuthenticate()
+    .subscribe(
+      (data) => {
+        this.auth.storeId(data.id);
+        this.auth.canAuthenticate();
       },
-      error: data => {
-        if(data.message = 'This username already exist try another'){
-           this.errorMessage = 'Already User exists!';
-        } else {
-          this.errorMessage = 'Unknown error occured when creating this account!';
-        }
+     (error) => {
+      console.log(error)
+      if(error.message = 'This username already exist try another'){
+        this.errorMessage = 'Already User exists';
+      } else {
+        this.errorMessage = 'Unknown error occured when creating this account!';
       }
-    }).add(() => {
+     }
+    ).add(() => {
       console.log('Regsiteration Completed')
     })
   }
-
 }
